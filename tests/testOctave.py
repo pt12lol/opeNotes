@@ -6,7 +6,7 @@ from src.octave import Octave
 from copy import copy
 
 
-class OctaveTests(unittest.TestCase):
+class TestOctave(unittest.TestCase):
 
     def setUp(self):
         self.o1 = Octave()

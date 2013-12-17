@@ -6,7 +6,7 @@ from src.rhythmicValue import RhythmicValue
 import unittest
 
 
-class RhythmicValueTests(unittest.TestCase):
+class TestRhythmicValue(unittest.TestCase):
 
     def setUp(self):
         self.rv1 = RhythmicValue()
