@@ -5,19 +5,21 @@
 from functools import total_ordering
 
 
-octaveSizes = ['upper', 'lower']
+sizes = ['upper', 'lower']
 
 
 @total_ordering
-class Octave:
+class Octave(object):
 
-    def __init__(self, size=None, lines=None):
-        if size == None:
-            size = 'lower'
-        if lines == None:
+    __slots__ = ['lines', 'size']
+
+    def __init__(self, lines=None, size=None):
+        if lines is None:
             lines = 1
-        self.size = size
+        if size is None:
+            size = 'lower'
         self.lines = lines
+        self.size = size
 
     def __repr__(self):
         return ''.join([',' if self.size == 'upper' else "'"

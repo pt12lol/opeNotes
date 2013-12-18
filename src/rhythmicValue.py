@@ -6,12 +6,14 @@ from functools import total_ordering
 
 
 @total_ordering
-class RhythmicValue:
+class RhythmicValue(object):
+
+    __slots__ = ['value', 'dots']
 
     def __init__(self, value=None, dots=None):
-        if value == None:
+        if value is None:
             value = 4
-        if dots == None:
+        if dots is None:
             dots = 0
         self.value = value
         self.dots = dots
