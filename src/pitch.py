@@ -40,8 +40,7 @@ class Pitch(object):
         return Pitch(name, alteration, octave.lines, octave.size)
 
     def quartertonesFromC(self):
-        result = scaleRels[names.index(self.name)] * 2 + self.alteration
-        return result if result < 24 else result - 24
+        return scaleRels[names.index(self.name)] * 2 + self.alteration
 
     def __repr__(self):
         result = self.name
@@ -69,14 +68,27 @@ class Pitch(object):
         return self.__repr__()
 
     def __eq__(self, other):
-        return (self.name, self.alteration, self.octave) \
-            == (other.name, other.alteration, other.octave)
+        selfQuartertones = self.quartertonesFromC()
+        otherQuartertones = other.quartertonesFromC()
+        selfAddOctaves = selfQuartertones // 24
+        otherAddOctaves = otherQuartertones // 24
+        selfQuartertones %= 24
+        otherQuartertones %= 24
+        octaves = self.octave + selfAddOctaves - other.octave - otherAddOctaves
+        quartertones = selfQuartertones - otherQuartertones
+        return quartertones + (octaves * 24) == 0
 
     def __ne__(self, other):
         return not self.__eq__(other)
 
     def __lt__(self, other):
-        quartertones = self.quartertonesFromC() - other.quartertonesFromC()
-        octaves = self.octave - other.octave
+        selfQuartertones = self.quartertonesFromC()
+        otherQuartertones = other.quartertonesFromC()
+        selfAddOctaves = selfQuartertones // 24
+        otherAddOctaves = otherQuartertones // 24
+        selfQuartertones %= 24
+        otherQuartertones %= 24
+        octaves = self.octave + selfAddOctaves - other.octave - otherAddOctaves
+        quartertones = selfQuartertones - otherQuartertones
         return quartertones + (octaves * 24) < 0
 
