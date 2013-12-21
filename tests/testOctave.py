@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from src.octave import Octave
+from octave import Octave
 from copy import copy
 
 

@@ -5,7 +5,7 @@
 from functools import total_ordering
 
 
-sizes = ['upper', 'lower']
+octaveSizes = ['upper', 'lower']
 
 
 @total_ordering
@@ -36,8 +36,8 @@ class Octave(object):
         return not self.__eq__(other)
 
     def __lt__(self, other):
-        return sizes.index(self.size) < sizes.index(other.size) \
-            if sizes.index(self.size) != sizes.index(other.size) \
+        return octaveSizes.index(self.size) < octaveSizes.index(other.size) \
+            if octaveSizes.index(self.size) != octaveSizes.index(other.size) \
             else (self.lines < other.lines if self.size == 'lower'
                   else self.lines > other.lines)
 

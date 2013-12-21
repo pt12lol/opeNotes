@@ -3,10 +3,10 @@
 
 
 from functools import total_ordering
-from src.octave import Octave
+from octave import Octave
 
 
-names = ['c', 'd', 'e', 'f', 'g', 'a', 'b']
+pitchNames = ['c', 'd', 'e', 'f', 'g', 'a', 'b']
 scaleRels = [0, 2, 4, 5, 7, 9, 11]
 
 
@@ -40,7 +40,7 @@ class Pitch(object):
         return Pitch(name, alteration, octave.lines, octave.size)
 
     def quartertonesFromC(self):
-        return scaleRels[names.index(self.name)] * 2 + self.alteration
+        return scaleRels[pitchNames.index(self.name)] * 2 + self.alteration
 
     def __repr__(self):
         result = self.name

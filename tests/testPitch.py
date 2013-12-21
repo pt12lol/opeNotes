@@ -2,7 +2,7 @@
 # -*- cpding: utf-8 -*-
 
 import unittest
-from src.pitch import Pitch, Octave
+from pitch import Pitch, Octave
 from copy import copy
 
 
