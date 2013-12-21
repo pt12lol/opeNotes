@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from octave import Octave
+from opeNotes.octave import Octave
 from copy import copy
 
 

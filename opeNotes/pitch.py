@@ -3,7 +3,7 @@
 
 
 from functools import total_ordering
-from octave import Octave
+from opeNotes.octave import Octave
 
 
 pitchNames = ['c', 'd', 'e', 'f', 'g', 'a', 'b']

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from rhythmicValue import RhythmicValue
+from opeNotes.rhythmicValue import RhythmicValue
 import unittest
 
 
