@@ -42,6 +42,17 @@ class Pitch(object):
     def quartertonesFromC(self):
         return scaleRels[pitchNames.index(self.name)] * 2 + self.alteration
 
+    def cmpPitch(self, other):
+        if self < other:
+            return -1
+        if self > other:
+            return 1
+        return 0
+
+    def eqNames(self, other):
+        return (self.name, self.alteration, self.octave) == \
+            (other.name, other.alteration, other.octave)
+
     def __repr__(self):
         result = self.name
         if self.alteration == 0:
