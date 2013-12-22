@@ -3,7 +3,6 @@
 
 import unittest
 from opeNotes.pitch import Pitch, Octave
-from copy import copy
 
 
 class TestPitch(unittest.TestCase):
