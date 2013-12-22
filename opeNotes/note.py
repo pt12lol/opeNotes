@@ -3,34 +3,50 @@
 
 
 from functools import total_ordering
+from opeNotes.rhythmicValue import RhythmicValue
+from opeNotes.pitch import Pitch, Octave
 
 
-@total_ordering
-class RhythmicValue(object):
+class Note(object):
 
-    __slots__ = ['value', 'dots']
+    __slots__ = ['rhythmicValue', 'pitches']
 
-    def __init__(self, value=None, dots=None):
+    def __init__(self, value=None, dots=None, *pitches):
         if value is None:
             value = 4
         if dots is None:
             dots = 0
-        self.value = value
-        self.dots = dots
+        if len(pitches) == 0:
+            pitches = Pitch(),
+        self.rhythmicValue = RhythmicValue(value, dots)
+        self.pitches = list(pitches)
+
+    @staticmethod
+    def fromRhythmicValue(rhythmicValue=None, *pitches):
+        if rhythmicValue is None:
+            rhythmicValue = RhythmicValue()
+        return Note(rhythmicValue.value, rhythmicValue.dots, *pitches)
 
     def __str__(self):
-        return str(self.value) + ''.join(['.' for _ in range(self.dots)])
+        return '<' + ' '.join([str(pitch) for pitch in self.pitches]) + '>' \
+            + str(self.rhythmicValue)
 
     def __repr__(self):
         return self.__str__()
 
     def __eq__(self, other):
-        return (self.value, self.dots) == (other.value, other.dots)
+        if self.rhythmicValue != other.rhythmicValue:
+            return False
+        for selfPitch in self.pitches:
+            broken = False
+            for otherPitch in other.pitches:
+                if selfPitch.eqNames(otherPitch):
+                    broken = True
+                    break
+            if not broken:
+                return False
+        return True
 
     def __ne__(self, other):
         return not self.__eq__(other)
-
-    def __lt__(self, other):
-        return self.value > other.value if self.value != other.value \
-            else self.dots < other.dots
 
