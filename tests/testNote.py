@@ -2,65 +2,42 @@
 # -*- coding: utf-8 -*-
 
 
-from opeNotes.rhythmicValue import RhythmicValue
 import unittest
+from opeNotes.note import Note, Pitch
+from opeNotes.rhythmicValue import RhythmicValue
 
 
-class TestRhythmicValue(unittest.TestCase):
+class TestNote(unittest.TestCase):
 
     def setUp(self):
-        self.rv1 = RhythmicValue()
-        self.rv2 = RhythmicValue(8, 1)
-        self.rv3 = RhythmicValue(8, 0)
-        self.rv4 = RhythmicValue(16, 2)
-        self.rv5 = RhythmicValue(4, 0)
+        self.n1 = Note()
+        self.n2 = Note(8, 1, Pitch('c', 2, 2), Pitch('e'), Pitch())
+        self.n3 = Note.fromRhythmicValue(RhythmicValue(8, 0), Pitch('d'))
+        self.n4 = Note(4, 0, Pitch('a'))
+        self.n5 = Note(8, 1)
+        self.n5.pitches.append(Pitch('c', 2, 2))
+        self.n5.pitches.append(Pitch('e'))
 
     def testRepr(self):
-        self.assertEqual(str(self.rv1), '4')
-        self.assertEqual(str(self.rv2), '8.')
-        self.assertEqual(str(self.rv3), '8')
-        self.assertEqual(str(self.rv4), '16..')
-        self.assertEqual(str(self.rv5), '4')
+        self.assertEqual(str(self.n1), "<a'>4")
+        self.assertEqual(str(self.n2), "<cis'' e' a'>8.")
+        self.assertEqual(str(self.n3), "<d'>8")
+        self.assertEqual(str(self.n4), "<a'>4")
+        self.assertEqual(str(self.n5), "<a' cis'' e'>8.")
 
     def testEq(self):
-        self.assertEqual(self.rv1, self.rv5)
-        self.assertTrue(self.rv1 == self.rv5)
-        self.assertFalse(self.rv2 == self.rv4)
-        self.assertFalse(self.rv3 == self.rv4)
-        self.assertFalse(self.rv3 == self.rv5)
+        self.assertEqual(self.n1, self.n4)
+        self.assertEqual(self.n2, self.n5)
+        self.assertTrue(self.n4 == self.n1)
+        self.assertTrue(self.n5 == self.n2)
+        self.assertFalse(self.n2 == self.n4)
+        self.assertFalse(self.n3 == self.n4)
+        self.assertFalse(self.n3 == self.n5)
 
     def testNe(self):
-        self.assertNotEqual(self.rv1, self.rv2)
-        self.assertTrue(self.rv2 != self.rv3)
-        self.assertTrue(self.rv2 != self.rv4)
-        self.assertFalse(self.rv1 != self.rv5)
-
-    def testLt(self):
-        self.assertLess(self.rv2, self.rv1)
-        self.assertTrue(self.rv3 < self.rv2)
-        self.assertTrue(self.rv4 < self.rv3)
-        self.assertFalse(self.rv5 < self.rv4)
-        self.assertFalse(self.rv1 < self.rv5)
-
-    def testGt(self):
-        self.assertGreater(self.rv1, self.rv2)
-        self.assertTrue(self.rv2 > self.rv3)
-        self.assertTrue(self.rv3 > self.rv4)
-        self.assertFalse(self.rv4 > self.rv5)
-        self.assertFalse(self.rv1 > self.rv5)
-
-    def testLe(self):
-        self.assertLessEqual(self.rv2, self.rv1)
-        self.assertLessEqual(self.rv5, self.rv1)
-        self.assertTrue(self.rv3 <= self.rv2)
-        self.assertTrue(self.rv4 <= self.rv3)
-        self.assertTrue(self.rv1 <= self.rv5)
-        self.assertFalse(self.rv5 <= self.rv4)
-
-    def testGe(self):
-        self.assertGreaterEqual(self.rv1, self.rv2)
-        self.assertTrue(self.rv2 >= self.rv3)
-        self.assertTrue(self.rv3 >= self.rv4)
-        self.assertTrue(self.rv1 >= self.rv5)
-        self.assertFalse(self.rv4 >= self.rv5)
+        self.assertNotEqual(self.n1, self.n2)
+        self.assertTrue(self.n2 != self.n3)
+        self.assertTrue(self.n2 != self.n4)
+        self.assertFalse(self.n2 != self.n5)
+        self.assertFalse(self.n1 != self.n4)
 
