@@ -103,3 +103,21 @@ class Pitch(object):
         quartertones = selfQuartertones - otherQuartertones
         return quartertones + (octaves * 24) < 0
 
+    def __add__(self, other):
+        index = pitchNames.index(self.name)
+        delta = (other.number - 1 + other.octaves * 7) * \
+            (1 if other.direction == 'up' else -1)
+        index += delta
+        octave = self.octave + (index // 7)
+        index %= 7
+        result = Pitch(pitchNames[index], self.alteration,
+                       octave.lines, octave.size)
+#         semitonesDifference = ((result.quartertonesFromC() -
+#                                 self.quartertonesFromC()) // 2)
+#         result.alteration += (((other.semitones() - semitonesDifference) * 2)
+#                               * (1 if other.direction == 'up' else -1))
+#         result.alteration %= 24
+#         if result.alteration > 4:
+#             result.alteration = -(24 - result.alteration)
+        return result
+

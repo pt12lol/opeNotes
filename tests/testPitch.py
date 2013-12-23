@@ -79,3 +79,12 @@ class TestPitch(unittest.TestCase):
         self.assertFalse(self.p4 >= self.p5)
         self.assertFalse(self.p3 >= self.p6)
 
+    def testAdd(self):
+        tmp = self.p2
+        tmp += Interval(3)
+        self.assertTrue(tmp.eqNames(Pitch('c', 2)))
+        self.assertTrue((tmp + Interval(2, 'up', 'minor')).eqNames(Pitch('d')))
+        self.assertTrue((tmp + Interval(4)).eqNames(Pitch('f', 2)))
+        self.assertTrue((tmp + Interval(5, 'down', 'aug'))
+                        .eqNames(Pitch('f', 0, 0)))
+
