@@ -10,12 +10,12 @@ class TestInterval(unittest.TestCase):
 
     def setUp(self):
         self.i1 = Interval(3)
-        self.i2 = Interval(5, 'perfect')
+        self.i2 = Interval(5, 'up', 'perfect')
         self.i3 = Interval(7)
-        self.i4 = Interval(7, 'minor')
-        self.i5 = Interval(4, 'aug', 1)
-        self.i6 = Interval(3, 'major')
-        self.i7 = Interval(10, 'minor')
+        self.i4 = Interval(7, type_='minor')
+        self.i5 = Interval(4, 'down', 'aug', 1)
+        self.i6 = Interval(3, 'up', 'major')
+        self.i7 = Interval(10, 'down', 'minor')
 
     def testRepr(self):
         self.assertEqual(str(self.i1), "3")
