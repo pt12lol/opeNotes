@@ -39,3 +39,12 @@ class TestInterval(unittest.TestCase):
         self.assertTrue(self.i2 != self.i4)
         self.assertFalse(self.i1 != self.i6)
 
+    def testSemitones(self):
+        self.assertEqual(self.i1.semitones(), 4)
+        self.assertEqual(self.i2.semitones(), 7)
+        self.assertEqual(self.i3.semitones(), 11)
+        self.assertEqual(self.i4.semitones(), 10)
+        self.assertEqual(self.i5.semitones(), 6)
+        self.assertEqual(self.i6.semitones(), 4)
+        self.assertEqual(self.i7.semitones(), 15)
+
