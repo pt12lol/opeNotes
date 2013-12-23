@@ -1,8 +1,9 @@
 #!/usr/bin/pythpn
 # -*- cpding: utf-8 -*-
 
+
 import unittest
-from opeNotes.pitch import Pitch, Octave
+from opeNotes.pitch import Pitch, Octave, Interval
 
 
 class TestPitch(unittest.TestCase):

@@ -4,10 +4,10 @@
 
 from functools import total_ordering
 from opeNotes.octave import Octave
+from opeNotes.interval import Interval, scaleRels
 
 
 pitchNames = ['c', 'd', 'e', 'f', 'g', 'a', 'b']
-scaleRels = [0, 2, 4, 5, 7, 9, 11]
 
 
 @total_ordering
