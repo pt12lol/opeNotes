@@ -44,7 +44,7 @@ class TestInterval(unittest.TestCase):
         self.assertEqual(self.i2.semitones(), 7)
         self.assertEqual(self.i3.semitones(), 11)
         self.assertEqual(self.i4.semitones(), 10)
-        self.assertEqual(self.i5.semitones(), 6)
+        self.assertEqual(self.i5.semitones(), -6)
         self.assertEqual(self.i6.semitones(), 4)
-        self.assertEqual(self.i7.semitones(), 15)
+        self.assertEqual(self.i7.semitones(), -15)
 
