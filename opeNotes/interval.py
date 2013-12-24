@@ -3,47 +3,43 @@
 
 
 intervalTypes = ['dim', 'minor', 'perfect', 'major', 'aug']
-intervalDirections = ['up', 'down']
 scaleRels = [0, 2, 4, 5, 7, 9, 11]
 
 
 class Interval(object):
 
-    __slots__ = ['octaves', 'number', 'direction', 'type_', 'dimAugFolds']
+    __slots__ = ['octaves', 'number', 'type_', 'direction', 'dimAugFolds']
 
-    def __init__(self, number, direction=None, type_=None, dimAugFolds=None):
-        self.octaves = (number - 1) // 7
-        self.number = (number - 1) % 7 + 1
+    def __init__(self, number, type_=None, dimAugFolds=None):
+        self.direction = (1 if number > 0 else -1)
+        self.number = (((number - self.direction) * self.direction) % 7) + 1
+        self.octaves = (number * self.direction - 1) // 7
         if type_ is None:
-            dimAugFolds = 0
             type_ = 'perfect' if self.number in [1, 4, 5] else 'major'
         if dimAugFolds is None:
             dimAugFolds = 0 if type_ in intervalTypes[1:4] else 1
         self.dimAugFolds = dimAugFolds
-        if direction is None:
-            direction = 'up'
-        self.direction = direction
         self.type_ = type_
 
     def semitones(self):
         result = scaleRels[self.number - 1] + self.octaves * 12
         if self.type_ == 'aug':
-            return result + self.dimAugFolds
-        if self.type_ == 'minor':
-            return result - 1
-        if self.type_ == 'dim':
-            return result - self.dimAugFolds - 1
-        return result
+            result += self.dimAugFolds
+        elif self.type_ == 'minor':
+            result -= 1
+        elif self.type_ == 'dim':
+            result -= self.dimAugFolds - 1
+        return result * self.direction
 
     def __str__(self):
         dim, aug = '>', '<'
-        result = str(self.number + self.octaves * 7)
+        result = str((self.number + self.octaves * 7) * self.direction)
         if self.number in [1, 4, 5]:
             return result + ''.join([dim if self.type_ == 'dim' else
                                      aug for _ in range(self.dimAugFolds)])
         if self.number in [2, 3, 6]:
             if self.type_ == 'minor':
-                return result + '>'
+                return result + dim
             if self.type_ == 'dim':
                 return result + \
                     ''.join([dim for _ in range(self.dimAugFolds + 1)])

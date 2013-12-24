@@ -8,6 +8,8 @@ from opeNotes.interval import Interval, scaleRels
 
 
 pitchNames = ['c', 'd', 'e', 'f', 'g', 'a', 'b']
+sign = lambda x: 1 if x > 0 else (-1 if x < 0 else 0)
+semitones = [2, 2, 1, 2, 2, 2, 1]
 
 
 @total_ordering
