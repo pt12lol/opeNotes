@@ -18,20 +18,26 @@ class Note(object):
             value = 4
         if dots is None:
             dots = 0
-        if len(pitches) == 0:
-            pitches = Pitch(),
         self.rhythmicValue = RhythmicValue(value, dots)
         self.pitches = list(pitches)
 
     @staticmethod
-    def fromRhythmicValue(rhythmicValue=None, *pitches):
+    def fromRhythmValAndPitches(rhythmicValue=None, *pitches):
         if rhythmicValue is None:
             rhythmicValue = RhythmicValue()
         return Note(rhythmicValue.value, rhythmicValue.dots, *pitches)
 
+    @staticmethod
+    def fromRhythmValAndStruct(rhythmicValue=None,
+                               startPitch=None, chord=None):
+        if rhythmicValue is None:
+            rhythmicValue = RhythmicValue()
+        return Note(rhythmicValue.value, rhythmicValue.dots,
+                    *(chord.buildFrom(startPitch)))
+
     def __str__(self):
-        return '<' + ' '.join([str(pitch) for pitch in self.pitches]) + '>' \
-            + str(self.rhythmicValue)
+        return (('<' + ' '.join([str(pitch) for pitch in self.pitches]) + '>')
+                if len(self.pitches) > 0 else 'r') + str(self.rhythmicValue)
 
     def __repr__(self):
         return self.__str__()
