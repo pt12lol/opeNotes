@@ -3,8 +3,10 @@
 
 
 from functools import total_ordering
+from opeNotes.octave import Octave
 from opeNotes.rhythmicValue import RhythmicValue
-from opeNotes.pitch import Pitch, Octave
+from opeNotes.pitch import Pitch
+from opeNotes.pitchesStructure import PitchesStructure
 
 
 class Note(object):
