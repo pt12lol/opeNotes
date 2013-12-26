@@ -2,6 +2,14 @@
 # -*- coding: utf-8 -*-
 
 
+<<<<<<< HEAD
+=======
+from functools import total_ordering
+from opeNotes.rhythmicValue import RhythmicValue
+from opeNotes.pitch import Pitch, Octave
+
+
+>>>>>>> ed3bea2bba80c9396d9a0cc8e9adae0cabc693b6
 class Party(object):
 
     __slots__ = ['notes']

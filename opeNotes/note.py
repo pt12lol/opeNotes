@@ -3,7 +3,14 @@
 
 
 from functools import total_ordering
+<<<<<<< HEAD
 from opeNotes.rhythmicValue import RhythmicValue
+=======
+from opeNotes.octave import Octave
+from opeNotes.rhythmicValue import RhythmicValue
+from opeNotes.pitch import Pitch
+from opeNotes.pitchesStructure import PitchesStructure
+>>>>>>> ed3bea2bba80c9396d9a0cc8e9adae0cabc693b6
 
 
 class Note(object):
