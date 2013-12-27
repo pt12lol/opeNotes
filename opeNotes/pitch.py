@@ -7,13 +7,8 @@ from opeNotes.octave import Octave
 from opeNotes.interval import Interval, scaleRels
 
 
-<<<<<<< HEAD
 sign = lambda x: 1 if x > 0 else (-1 if x < 0 else 0)
 pitchNames = ['c', 'd', 'e', 'f', 'g', 'a', 'b']
-=======
-pitchNames = ['c', 'd', 'e', 'f', 'g', 'a', 'b']
-sign = lambda x: 1 if x > 0 else (-1 if x < 0 else 0)
->>>>>>> ed3bea2bba80c9396d9a0cc8e9adae0cabc693b6
 semitones = [2, 2, 1, 2, 2, 2, 1]
 
 

@@ -3,13 +3,9 @@
 
 
 import unittest
-<<<<<<< HEAD
 from opeNotes.octave import Octave
 from opeNotes.interval import Interval
 from opeNotes.pitch import Pitch
-=======
-from opeNotes.pitch import Pitch, Octave, Interval
->>>>>>> ed3bea2bba80c9396d9a0cc8e9adae0cabc693b6
 
 
 class TestPitch(unittest.TestCase):

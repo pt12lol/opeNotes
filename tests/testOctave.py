@@ -1,14 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+
 import unittest
-<<<<<<< HEAD
 from copy import copy
 from opeNotes.octave import Octave
-=======
-from opeNotes.octave import Octave
-from copy import copy
->>>>>>> ed3bea2bba80c9396d9a0cc8e9adae0cabc693b6
 
 
 class TestOctave(unittest.TestCase):

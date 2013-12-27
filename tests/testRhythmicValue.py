@@ -2,13 +2,8 @@
 # -*- coding: utf-8 -*-
 
 
-<<<<<<< HEAD
 import unittest
 from opeNotes.rhythmicValue import RhythmicValue
-=======
-from opeNotes.rhythmicValue import RhythmicValue
-import unittest
->>>>>>> ed3bea2bba80c9396d9a0cc8e9adae0cabc693b6
 
 
 class TestRhythmicValue(unittest.TestCase):

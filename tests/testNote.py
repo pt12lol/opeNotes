@@ -3,18 +3,11 @@
 
 
 import unittest
-<<<<<<< HEAD
 from opeNotes.rhythmicValue import RhythmicValue
 from opeNotes.interval import Interval
 from opeNotes.pitch import Pitch
 from opeNotes.pitchesStructure import PitchesStructure
 from opeNotes.note import Note
-=======
-from opeNotes.note import Note, Pitch
-from opeNotes.rhythmicValue import RhythmicValue
-from opeNotes.interval import Interval
-from opeNotes.pitchesStructure import PitchesStructure
->>>>>>> ed3bea2bba80c9396d9a0cc8e9adae0cabc693b6
 
 
 class TestNote(unittest.TestCase):
