@@ -26,8 +26,8 @@ class Octave(object):
         Args:
             lines (int): lines of octave (default: 1)
             size  (str): case of letter in music notation of octave;
-                should be only from set of octaveSizes list - 'upper' or 'lower'
-                (default: 'lower')
+                should be only from set of octaveSizes list - 'upper'
+                or 'lower' (default: 'lower')
         """
         if lines is None:
             lines = 1
@@ -37,20 +37,20 @@ class Octave(object):
         self.size = size
 
     def __repr__(self):
-        """Returns string describing octave in Lilypond notation.
+        """Returns string describing octave in LilyPond notation.
 
         Returns:
-            string describing octave in Lilypond notation
+            string describing octave in LilyPond notation
         """
         return ''.join([',' if self.size == 'upper' else "'"
                         for i in range(self.lines + 1
                         if self.size == 'upper' else self.lines)])
 
     def __str__(self):
-        """Returns string describing octave in Lilypond notation.
+        """Returns string describing octave in LilyPond notation.
 
         Returns:
-            string describing octave in Lilypond notation
+            string describing octave in LilyPond notation
         """
         return self.__repr__()
 
@@ -71,8 +71,8 @@ class Octave(object):
         Args:
             other (Octave): octave to compare with self
         Returns:
-            result of non-equality of self pair of lines and size with other pair
-                of lines and size
+            result of non-equality of self pair of lines and size with other
+                pair of lines and size
         """
         return not self.__eq__(other)
 
