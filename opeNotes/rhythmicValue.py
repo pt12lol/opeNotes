@@ -34,7 +34,7 @@ class RhythmicValue(object):
         self.value = value
         self.dots = dots
 
-    def __str__(self):
+    def __repr__(self):
         """Returns string describing rhythmic value in LilyPond notation.
 
         Returns:
@@ -42,13 +42,13 @@ class RhythmicValue(object):
         """
         return str(self.value) + ''.join(['.' for _ in range(self.dots)])
 
-    def __repr__(self):
+    def __str__(self):
         """Returns string describing rhythmic value in LilyPond notation.
 
         Returns:
             string describing rhythmic value in LilyPond notation
         """
-        return self.__str__()
+        return self.__repr__()
 
     def __eq__(self, other):
         """Checks whether two rhythmic values are the same.

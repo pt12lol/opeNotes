@@ -9,9 +9,9 @@ class Party(object):
     def __init__(self, *notes):
         self.notes = list(notes)
 
-    def __str__(self):
+    def __repr__(self):
         return '{ ' + ' '.join([str(note) for note in self.notes]) + ' }'
 
-    def __repr__(self):
-        return self.__str__()
+    def __str__(self):
+        return self.__repr__()
 

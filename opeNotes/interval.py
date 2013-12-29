@@ -31,7 +31,7 @@ class Interval(object):
             result -= self.dimAugFolds - 1
         return result * self.direction
 
-    def __str__(self):
+    def __repr__(self):
         dim, aug = '>', '<'
         result = str((self.number + self.octaves * 7) * self.direction)
         if self.number in [1, 4, 5]:
@@ -55,8 +55,8 @@ class Interval(object):
                 return result + ''.join([dim for _ in range(self.dimAugFolds)])
         return result
 
-    def __repr__(self):
-        return self.__str__()
+    def __str__(self):
+        return self.__repr__()
 
     def __eq__(self, other):
         return (self.octaves, self.number, self.direction, self.type_,

@@ -32,12 +32,12 @@ class Note(object):
         return Note(rhythmicValue.value, rhythmicValue.dots,
                     *(chord.buildFrom(startPitch)))
 
-    def __str__(self):
+    def __repr__(self):
         return (('<' + ' '.join([str(pitch) for pitch in self.pitches]) + '>')
                 if len(self.pitches) > 0 else 'r') + str(self.rhythmicValue)
 
-    def __repr__(self):
-        return self.__str__()
+    def __str__(self):
+        return self.__repr__()
 
     def __eq__(self, other):
         if self.rhythmicValue != other.rhythmicValue:
