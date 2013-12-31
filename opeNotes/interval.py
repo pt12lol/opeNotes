@@ -67,3 +67,7 @@ class Interval(object):
     def __ne__(self, other):
         return not self.__eq__(other)
 
+    def __neg__(self):
+        return Interval(-(self.direction * (self.number + self.octaves * 7)),
+                        self.type_, self.dimAugFolds)
+

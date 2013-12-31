@@ -48,3 +48,10 @@ class TestInterval(unittest.TestCase):
         self.assertEqual(self.i6.semitones(), 4)
         self.assertEqual(self.i7.semitones(), -15)
 
+    def testNeg(self):
+        self.assertEqual(-self.i1, Interval(-3))
+        self.assertEqual(-self.i2, Interval(-5))
+        self.assertEqual(-self.i3, Interval(-7))
+        self.assertEqual(-self.i5, Interval(4, 'aug'))
+        self.assertEqual(-self.i7, Interval(10, 'minor'))
+
