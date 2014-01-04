@@ -31,6 +31,11 @@ class Interval(object):
             result -= self.dimAugFolds - 1
         return result * self.direction
 
+    def inversion(self):
+        return Interval(self.direction * (9 - self.number),
+                        intervalTypes[4 - intervalTypes.index(self.type_)],
+                        self.dimAugFolds)
+
     def __repr__(self):
         dim, aug = '>', '<'
         result = str((self.number + self.octaves * 7) * self.direction)

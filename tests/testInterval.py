@@ -55,3 +55,10 @@ class TestInterval(unittest.TestCase):
         self.assertEqual(-self.i5, Interval(4, 'aug'))
         self.assertEqual(-self.i7, Interval(10, 'minor'))
 
+    def testInversion(self):
+        self.assertEqual(self.i1.inversion(), Interval(6, 'minor'))
+        self.assertEqual(self.i2.inversion(), Interval(4))
+        self.assertEqual(self.i3.inversion(), Interval(2, 'minor'))
+        self.assertEqual(self.i5.inversion(), Interval(-5, 'dim', 1))
+        self.assertEqual(self.i7.inversion(), Interval(-6))
+
