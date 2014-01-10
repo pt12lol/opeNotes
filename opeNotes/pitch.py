@@ -202,7 +202,8 @@ class Pitch(object):
         difference = 0
         while index != pitchNames.index(self.name):
             index = (index - other.direction) % 7
-            difference += semitones[index]
+            difference += semitones[index if other.direction > 0
+                                    else ((index - 1) % 7)]
         difference *= other.direction
         result.alteration += ((other.semitones() - difference) * 2)
         if result.alteration <= -24:

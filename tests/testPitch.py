@@ -88,6 +88,7 @@ class TestPitch(unittest.TestCase):
         self.assertTrue((tmp + Interval(2, 'minor')).eqNames(Pitch('d')))
         self.assertTrue((tmp + Interval(4)).eqNames(Pitch('f', 2)))
         self.assertTrue((tmp + Interval(-5, 'aug')).eqNames(Pitch('f', 0, 0)))
+        self.assertTrue((tmp + Interval(-2)).eqNames(Pitch('b', 0, 0)))
 
     def testSub(self):
         tmp = self.p2
@@ -96,4 +97,5 @@ class TestPitch(unittest.TestCase):
         self.assertTrue((tmp - Interval(-2, 'minor')).eqNames(Pitch('g', -2)))
         self.assertTrue((tmp - Interval(-5, 'aug')).eqNames(Pitch('c', 2, 2)))
         self.assertTrue((tmp - Interval(10)).eqNames(Pitch('d', -2, 0)))
+        self.assertTrue((tmp - Interval(2)).eqNames(Pitch('e', -2)))
 
