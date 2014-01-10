@@ -12,7 +12,7 @@ pitches = scale.buildFrom(Pitch('c'))
 def main():
     current = 0
     party = Party()
-    party.notes.append(Note(32, 0, Pitch('d')))
+    party.notes.append(Note(32, 0, Pitch()))
     for i in range(256):
         if randint(0, 1):
             interval = scale.intervals[current % 7]
@@ -21,6 +21,8 @@ def main():
             interval = -(scale.intervals[(current - 1) % 7])
             current -= 1
         lastPitch = party.notes[-1].pitches[0]
+        if randint(0, 256) < i:
+            party.notes[-1].pitches.append(lastPitch + Interval(-10))
         party.notes.append(Note(32, 0, lastPitch + interval))
     print(lyMidiTemplate % str(party))
 
