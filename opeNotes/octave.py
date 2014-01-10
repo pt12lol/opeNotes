@@ -108,7 +108,7 @@ class Octave(object):
             return Octave(self.lines + other, 'lower')
         if self.lines - other < 0:
             return Octave(-self.lines + other - 1, 'lower')
-        return Octave(self.lines + other, 'upper')
+        return Octave(self.lines - other, 'upper')
 
     def __sub__(self, other):
         """Adds to self octave integer and returns octave lesser than self of
