@@ -3,13 +3,9 @@
 
 
 from functools import total_ordering
+from opeNotes.sound import Sound, pitchNames
 from opeNotes.octave import Octave
-from opeNotes.interval import Interval, scaleRels
-
-
-sign = lambda x: 1 if x > 0 else (-1 if x < 0 else 0)
-pitchNames = ['c', 'd', 'e', 'f', 'g', 'a', 'b']
-semitones = [2, 2, 1, 2, 2, 2, 1]
+from opeNotes.interval import Interval, semitones
 
 
 @total_ordering
@@ -17,16 +13,16 @@ class Pitch(object):
     """Represents class of music pitches.
 
     Attrs:
-        name       (str):    describing name of pitch
-        alteration (int):    describing alteration of pitch
-        octave     (Octave): describing octave of pitch
+        sound  (Sound):  describing name and alteration of pitch
+        octave (Octave): describing octave of pitch
     """
 
-    __slots__ = ['name', 'alteration', 'octave']
+    __slots__ = ['sound', 'octave']
 
     def __init__(self, name=None, alteration=None,
                  octaveLines=None, octaveSize=None):
         """Creates instance of Pitch by name, alteration and octave parameters
+
         Args:
             name        (str): name of pitch; should be one-letter string from
                 the pitchNames list (default: 'a')
@@ -45,8 +41,7 @@ class Pitch(object):
             octaveLines = 1
         if octaveSize is None:
             octaveSize = 'lower'
-        self.name = name
-        self.alteration = alteration
+        self.sound = Sound(name, alteration)
         self.octave = Octave(octaveLines, octaveSize)
 
     @staticmethod
@@ -68,13 +63,19 @@ class Pitch(object):
             octave = Octave()
         return Pitch(name, alteration, octave.lines, octave.size)
 
-    def quartertonesFromC(self):
-        """Gets number of quartertones from C.
+    @staticmethod
+    def fromSoundAndOctave(sound=None, octave=None):
+        """Static factory to product pitch from Sound and Octave.
 
-        Returns:
-            number of quartertones from 'c' pitch in the same octave as self
+        Args:
+            sound  (Sound):  sound of pitch (default: Sound())
+            octave (Octave): octave for pitch (default: Octave())
         """
-        return scaleRels[pitchNames.index(self.name)] * 2 + self.alteration
+        if sound is None:
+            sound = Sound()
+        if octave is None:
+            octave = Octave()
+        return Pitch(sound.name, sound.alteration, octave.lines, octave.size)
 
     def cmpPitch(self, other):
         """Compares two pitches by their height.
@@ -100,8 +101,8 @@ class Pitch(object):
             equalation of tuples of self name, self alteration and self octave
                 with other name, other alteration and other octave
         """
-        return (self.name, self.alteration, self.octave) == \
-            (other.name, other.alteration, other.octave)
+        return (self.sound.name, self.sound.alteration, self.octave) == \
+            (other.sound.name, other.sound.alteration, other.octave)
 
     def __repr__(self):
         """Returns string describing pitch in LilyPond notation.
@@ -109,26 +110,7 @@ class Pitch(object):
         Returns:
             string describing pitch in LilyPond notation
         """
-        result = self.name
-        if self.alteration == 0:
-            return result + str(self.octave)
-        elif self.alteration == 1:
-            result += 'ih'
-        elif self.alteration == 2:
-            result += 'is'
-        elif self.alteration == 3:
-            result += 'isih'
-        elif self.alteration == 4:
-            result += 'isis'
-        elif self.alteration == -1:
-            result += 'eh'
-        elif self.alteration == -2:
-            result += 'es'
-        elif self.alteration == -3:
-            result += 'eseh'
-        elif self.alteration == -4:
-            result += 'eses'
-        return result + str(self.octave)
+        return str(self.sound) + str(self.octave)
 
     def __str__(self):
         """Returns string describing pitch in LilyPond notation.
@@ -146,8 +128,8 @@ class Pitch(object):
         Returns:
             result of equality of heights of two pitches
         """
-        selfQuartertones = self.quartertonesFromC()
-        otherQuartertones = other.quartertonesFromC()
+        selfQuartertones = self.sound.quartertonesFromC()
+        otherQuartertones = other.sound.quartertonesFromC()
         selfAddOctaves = selfQuartertones // 24
         otherAddOctaves = otherQuartertones // 24
         selfQuartertones %= 24
@@ -174,8 +156,8 @@ class Pitch(object):
         Returns:
             result of comparison heights of two pitches
         """
-        selfQuartertones = self.quartertonesFromC()
-        otherQuartertones = other.quartertonesFromC()
+        selfQuartertones = self.sound.quartertonesFromC()
+        otherQuartertones = other.sound.quartertonesFromC()
         selfAddOctaves = selfQuartertones // 24
         otherAddOctaves = otherQuartertones // 24
         selfQuartertones %= 24
@@ -192,23 +174,23 @@ class Pitch(object):
         Returns:
             pitch which is self increased of other interval
         """
-        index = pitchNames.index(self.name)
+        index = pitchNames.index(self.sound.name)
         delta = (other.number - 1 + other.octaves * 7) * other.direction
         index += delta
         octave = self.octave + (index // 7)
         index %= 7
-        result = Pitch(pitchNames[index], self.alteration,
+        result = Pitch(pitchNames[index], self.sound.alteration,
                        octave.lines, octave.size)
         difference = 0
-        while index != pitchNames.index(self.name):
+        while index != pitchNames.index(self.sound.name):
             index = (index - other.direction) % 7
             difference += semitones[index if other.direction > 0
                                     else ((index - 1) % 7)]
         difference *= other.direction
-        result.alteration += ((other.semitones() - difference) * 2)
-        if result.alteration <= -24:
-            result.alteration += 24
-        elif result.alteration >= 24:
+        result.sound.alteration += ((other.semitones() - difference) * 2)
+        if result.sound.alteration <= -24:
+            result.sound.alteration += 24
+        elif result.sound.alteration >= 24:
             result -= 24
         return result
 
