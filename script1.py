@@ -21,9 +21,11 @@ def main():
             interval = -(scale.intervals[(current - 1) % 7])
             current -= 1
         lastPitch = party.notes[-1].pitches[0]
+        party.notes.append(Note(32, 0, lastPitch + interval))
         if randint(0, 256) < i:
             party.notes[-1].pitches.append(lastPitch + Interval(-10))
-        party.notes.append(Note(32, 0, lastPitch + interval))
+        if randint(0, 256) < i:
+            party.notes[-1].pitches.append(lastPitch + Interval(-4))
     print(lyMidiTemplate % str(party))
 
 if __name__ == '__main__':
