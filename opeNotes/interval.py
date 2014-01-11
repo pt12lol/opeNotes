@@ -3,7 +3,7 @@
 
 
 intervalTypes = ['dim', 'minor', 'perfect', 'major', 'aug']
-scaleRels = [0, 2, 4, 5, 7, 9, 11]
+semitones = [2, 2, 1, 2, 2, 2, 1]
 
 
 class Interval(object):
@@ -22,7 +22,7 @@ class Interval(object):
         self.type_ = type_
 
     def semitones(self):
-        result = scaleRels[self.number - 1] + self.octaves * 12
+        result = sum(semitones[:self.number - 1]) + self.octaves * 12
         if self.type_ == 'aug':
             result += self.dimAugFolds
         elif self.type_ == 'minor':
