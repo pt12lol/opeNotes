@@ -10,7 +10,7 @@ class Party(object):
         self.notes = list(notes)
 
     def __repr__(self):
-        return '{ ' + ' '.join([str(note) for note in self.notes]) + ' }'
+        return ' '.join([str(note) for note in self.notes])
 
     def __str__(self):
         return self.__repr__()
