@@ -191,7 +191,7 @@ class Pitch(object):
         if result.sound.alteration <= -24:
             result.sound.alteration += 24
         elif result.sound.alteration >= 24:
-            result -= 24
+            result.sound.alteration -= 24
         return result
 
     def __sub__(self, other):

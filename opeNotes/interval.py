@@ -28,7 +28,7 @@ class Interval(object):
         elif self.type_ == 'minor':
             result -= 1
         elif self.type_ == 'dim':
-            result -= self.dimAugFolds - 1
+            result -= self.dimAugFolds
         return result * self.direction
 
     def inversion(self):
